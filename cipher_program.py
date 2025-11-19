@@ -1,15 +1,28 @@
+#cipgher_program.py
+# A simple cipher program implementing Caesar, Vigenère, and Substitution ciphers.
+# Author: Will Ledwith
+# Date Created: 18th November 2025
+
+#Library Imports
 import time as time
 
 
 
-
+#Menu and Choice Function
 def menu():
+    print("\n------------------------------")
+    print("Menu")
+    print("------------------------------")
     print("Cypher Tool Menu:")
     print ("1. Caesar Cipher")
     print ("2. Vigenère Cipher")
     print("3. Substitution Cipher")
     print("4. Exit")
+    time.sleep(1)
+    print("------------------------------")
     choice = input("Select an option (1-4): ")
+    print("------------------------------\n\n")
+    time.sleep(1)
 
     match choice:
         case "1":
@@ -21,10 +34,15 @@ def menu():
         case "4":
             print("Exiting the program.")
             exit()
+        case _:
+            print("Invalid choice. Please select a valid option.")
+            menu()
+        
 
+# Caesar Cipher Function - Encrypts and Decrypts text using a shift value.
 def caesar_cipher():
     print("Caesar Cipher selected.")
-
+    time.sleep(2)
     choice = input("Would you like to (e)ncrypt or (d)ecrypt? ").lower()
     match choice:
         case "e":
@@ -61,6 +79,8 @@ def caesar_cipher():
             print("Invalid choice. Returning to menu.")
     menu()
 
+
+# Vigenère Cipher Function - Encrypts and Decrypts text using a keyword.
 def vigenere_cipher():
     print("Vigenère Cipher selected.")
     time.sleep(2)
@@ -113,7 +133,7 @@ def vigenere_cipher():
     menu()
 
 
-
+# Substitution Cipher Function - Encrypts and Decrypts text using a substitution key.
 def substitution_cipher():
     print("Substitution Cipher selected.")
     time.sleep(2)
@@ -165,5 +185,8 @@ def substitution_cipher():
             
     menu()
 
+# Main Program Execution
 if __name__ == "__main__":
+    print("Welcome to the Cipher Program!")
+    print ("------------------------------")
     menu()
