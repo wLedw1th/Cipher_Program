@@ -5,7 +5,24 @@
 
 #Library Imports
 import time as time
+import csv
+import os
+from datetime import datetime
 
+
+# Logging Function - Saves cipher operations to a CSV file
+def log_cipher_operation(cipher_type, original_text, operation, output_text):
+    log_file = "cipher_log.txt"
+    file_exists = os.path.isfile(log_file)
+    
+    with open(log_file, 'a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        # Write header if file is new
+        if not file_exists:
+            writer.writerow(["Timestamp", "Cipher Type", "Original Text", "Operation", "Output Text"])
+        # Write the log entry
+        timestamp = datetime.now().strftime("%d %m %Y %H:%M:%S")
+        writer.writerow([timestamp, cipher_type, original_text, operation, output_text])
 
 
 #Menu and Choice Function
@@ -59,6 +76,7 @@ def caesar_cipher():
             print("------------------------------\n\n")
             print(f"Encrypted text with shift {shift}: {encrypted_text}")
             print("------------------------------\n\n")
+            log_cipher_operation("Caesar Cipher", text, "Encrypted", encrypted_text)
 
 
         case "d":
@@ -74,6 +92,7 @@ def caesar_cipher():
             decrypted_text = ''.join(textArray)
             print(f"Decrypted text with shift {shift}: {decrypted_text}")
             print("------------------------------\n\n")
+            log_cipher_operation("Caesar Cipher", text, "Decrypted", decrypted_text)
             time.sleep(2)
         case _:
             print("Invalid choice. Returning to menu.")
@@ -106,6 +125,7 @@ def vigenere_cipher():
             encrypted_text = ''.join(textArray)
             print(f"Encrypted text with key '{key}': {encrypted_text}")
             print("------------------------------\n\n")
+            log_cipher_operation("Vigenère Cipher", text, "Encrypted", encrypted_text)
             time.sleep(2)
         
         case "d":
@@ -127,6 +147,7 @@ def vigenere_cipher():
             decrypted_text = ''.join(textArray)
             print(f"Decrypted text with key '{key}': {decrypted_text}")
             print("------------------------------\n\n")
+            log_cipher_operation("Vigenère Cipher", text, "Decrypted", decrypted_text)
             time.sleep(2)
         case _:
             print("Invalid choice. Returning to menu.")
@@ -158,6 +179,7 @@ def substitution_cipher():
             encrypted_text = ''.join(textArray)
             print(f"Encrypted text with key '{key}': {encrypted_text}")
             print("------------------------------\n\n")
+            log_cipher_operation("Substitution Cipher", text, "Encrypted", encrypted_text)
             time.sleep(2)
 
         case "d":
@@ -179,6 +201,7 @@ def substitution_cipher():
             decrypted_text = ''.join(textArray)
             print(f"Decrypted text with key '{key}': {decrypted_text}")
             print("------------------------------\n\n")
+            log_cipher_operation("Substitution Cipher", text, "Decrypted", decrypted_text)
             time.sleep(2)
         case _:
             print("Invalid choice. Returning to menu.")
